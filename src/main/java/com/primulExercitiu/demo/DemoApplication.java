@@ -7,6 +7,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
+import java.util.List;
+
 @SpringBootApplication
 public class DemoApplication {
 
@@ -18,10 +20,13 @@ public class DemoApplication {
 	public CommandLineRunner commandLineRunner(StudentDAO studentDAO) {
 		return runner -> {
 			//createStudent(studentDAO);
-			createMultipleStudents(studentDAO);
+			//createMultipleStudents(studentDAO);
+			//readStudent(studentDAO);
+			queryForStudents(studentDAO);
 		};
 
 	}
+
 
 	private void createStudent(StudentDAO studentDAO) {
 
@@ -37,6 +42,7 @@ public class DemoApplication {
 		System.out.println("Saved student. Generated id:" + newStudent.getId());
 
 	}
+
 	private void createMultipleStudents(StudentDAO studentDAO) {
 		System.out.println("Creating 3 student objects ...");
 		Student newStudent1 = new Student("Andrei", "Munteanu", "andrei@pixelacademy.md");
@@ -50,5 +56,39 @@ public class DemoApplication {
 		studentDAO.save(newStudent3);
 
 	}
+
+	private void readStudent(StudentDAO studentDAO) {
+
+		//creeaza un obiect de tip Student
+		System.out.println("Createing new student object ...");
+		Student newStudent = new Student("Mircea", "Popescu", "mirceap@pixel.academy");
+
+		//salveaza studetul in baza  de date
+		System.out.println("Saving the student ...");
+		studentDAO.save(newStudent);
+
+		//afiseaza id-ul studetului salvat
+		int theId = newStudent.getId();
+		System.out.println("Saved student. Generated id: " + theId);
+
+		//recuperaza studetul pe ba ID-ului {PK}
+		System.out.println("Retrieving student with id: " + theId);
+		Student myStudent = studentDAO.findById(theId);
+
+		//afiseaza detalliile studetului
+		System.out.println("Found the student; " + myStudent);
+	}
+
+	private void queryForStudents(StudentDAO studentDAO) {
+		//obtine lista de studenti
+		List<Student> theStudent = studentDAO.findAll();
+
+		//afiseaza lista de studenti
+		for (Student newStudent : theStudent) {
+			System.out.println(newStudent);
+		}
+	}
+
+
 
 }
