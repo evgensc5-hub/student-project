@@ -22,7 +22,8 @@ public class DemoApplication {
 			//createStudent(studentDAO);
 			//createMultipleStudents(studentDAO);
 			//readStudent(studentDAO);
-			queryForStudents(studentDAO);
+			//queryForStudents(studentDAO);
+			queryForStudentsByLastName(studentDAO);
 		};
 
 	}
@@ -85,6 +86,16 @@ public class DemoApplication {
 
 		//afiseaza lista de studenti
 		for (Student newStudent : theStudent) {
+			System.out.println(newStudent);
+		}
+	}
+	private void queryForStudentsByLastName(StudentDAO studentDAO) {
+
+		//returneaza lista de studenti
+		List<Student> theStudent = studentDAO.findByLastName("Popescu");
+
+		//ataseaza lista de studenti
+		for(Student newStudent : theStudent) {
 			System.out.println(newStudent);
 		}
 	}
