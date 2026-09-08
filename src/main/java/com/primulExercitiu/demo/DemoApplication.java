@@ -25,7 +25,8 @@ public class DemoApplication {
 			//queryForStudents(studentDAO);
 			//queryForStudentsByLastName(studentDAO);
 			//updateStudent(studentDAO);
-			deleteStudent(studentDAO);
+			//deleteStudent(studentDAO);
+			deleteAllStudents(studentDAO);
 		};
 
 	}
@@ -79,7 +80,7 @@ public class DemoApplication {
 		Student myStudent = studentDAO.findById(theId);
 
 		//afiseaza detalliile studetului
-		System.out.println("Found the student; " + myStudent);
+		System.out.println("Found the student: " + myStudent);
 	}
 
 	private void queryForStudents(StudentDAO studentDAO) {
@@ -104,7 +105,7 @@ public class DemoApplication {
 	private void updateStudent (StudentDAO studentDAO) {
 		//gaseste studentul in baza de date folosind ID (Cheia primara)
 		int studentId = 3;
-		System.out.println("Getting student with id; " + studentId);
+		System.out.println("Getting student with id: " + studentId);
 		Student newStudent = studentDAO.findById(studentId);
 
 		//modifica prenumele studentului in "Ion"
@@ -120,9 +121,14 @@ public class DemoApplication {
 	}
 	private void deleteStudent(StudentDAO studentDAO) {
 
-		int studentId = 3;
+		int studentId = 5;
 		System.out.println("Deleting student id: " + studentId);
 		studentDAO.delete(studentId);
+	}
+	private void deleteAllStudents(StudentDAO studentDAO) {
+		System.out.println("Deleting all students.");
+		int numRowsDeleted = studentDAO.deleteAll();
+		System.out.println("Deleted row count: " + numRowsDeleted);
 	}
 
 }
