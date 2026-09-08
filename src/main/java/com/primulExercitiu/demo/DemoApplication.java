@@ -23,7 +23,8 @@ public class DemoApplication {
 			//createMultipleStudents(studentDAO);
 			//readStudent(studentDAO);
 			//queryForStudents(studentDAO);
-			queryForStudentsByLastName(studentDAO);
+			//queryForStudentsByLastName(studentDAO);
+			updateStudent(studentDAO);
 		};
 
 	}
@@ -98,6 +99,23 @@ public class DemoApplication {
 		for(Student newStudent : theStudent) {
 			System.out.println(newStudent);
 		}
+	}
+	private void updateStudent (StudentDAO studentDAO) {
+		//gaseste studentul in baza de date folosind ID (Cheia primara)
+		int studentId = 3;
+		System.out.println("Getting student with id; " + studentId);
+		Student newStudent = studentDAO.findById(studentId);
+
+		//modifica prenumele studentului in "Ion"
+		System.out.println("Updating student ...");
+		newStudent.setFirstName("Doina");
+
+		//salveaza modificarile in baza de date
+		studentDAO.update(newStudent);
+
+		//afiseaza detaliile studentului actualizat
+		System.out.println("Update student: " + newStudent);
+
 	}
 
 
